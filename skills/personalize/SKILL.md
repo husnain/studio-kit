@@ -3,7 +3,7 @@ name: personalize
 description: Write a version of each campaign email for every lead group in leads/leads.csv. Use when a campaign's emails are final and you want one copy per group.
 argument-hint: "[campaign folder]"
 context: fork
-allowed-tools: Read, Glob, Grep, Write
+allowed-tools: Read, Glob, Grep, Write(campaigns/**)
 ---
 
 You are running the **personalize** skill. Work through the steps below, then stop with a short summary. Do not explain what you are doing as you go.
