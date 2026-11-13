@@ -1,0 +1,8 @@
+{
+  "name": "studio-kit",
+  "version": "0.1.0",
+  "description": "Email campaign studio tools: safe send guard, audience personalizer, and brand voice reviewer.",
+  "license": "MIT",
+  "author": "husnain",
+  "homepage": "https://husnain.github.io/studio-kit"
+}

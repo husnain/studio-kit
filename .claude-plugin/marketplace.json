@@ -1,0 +1,13 @@
+{
+  "name": "studio-kit-local",
+  "owner": {
+    "name": "studio-kit"
+  },
+  "plugins": [
+    {
+      "name": "studio-kit",
+      "description": "Email campaign studio tools: safe send guard, audience personalizer, and brand voice reviewer.",
+      "source": "./"
+    }
+  ]
+}

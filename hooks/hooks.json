@@ -1,0 +1,16 @@
+{
+  "description": "Blocks bulk Resend sends and restricts individual send/batch-email to @resend.dev addresses and the MY_EMAIL env var. Set MY_EMAIL in your project settings.local.json.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "mcp__resend__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/send-guard.mjs\""
+          }
+        ]
+      }
+    ]
+  }
+}

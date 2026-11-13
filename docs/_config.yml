@@ -1,0 +1,12 @@
+title: studio-kit
+description: Email campaign studio tools for Claude Code — safe send guard, audience personalizer, and brand voice reviewer.
+url: "https://husnain.github.io"
+baseurl: "/studio-kit"
+
+theme: minima
+
+plugins:
+  - jekyll-seo-tag
+
+minima:
+  skin: dark
