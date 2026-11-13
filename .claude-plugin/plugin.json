@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Email campaign studio tools: safe send guard, audience personalizer, and brand voice reviewer.",
   "license": "MIT",
-  "author": "husnain",
+  "author": {
+    "name": "husnain",
+    "url": "https://github.com/husnain"
+  },
   "homepage": "https://husnain.github.io/studio-kit"
 }
