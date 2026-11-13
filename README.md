@@ -1,12 +1,33 @@
 # studio-kit
 
-A Claude Code plugin with the reusable infrastructure for email campaign projects: a safe send guard, an audience personalizer, a brand voice reviewer, and the scripts to run them.
+A Claude Code plugin that stops you from accidentally emailing your whole list — and brings structure to email campaign projects with an audience personalizer, brand voice reviewer, and CI-ready review script.
 
 ---
 
-## What is in this kit
+## Send guard
 
-- **`hooks/send-guard.mjs`** — a `PreToolUse` hook that blocks bulk Resend tools and restricts `send-email` / `send-batch-emails` to `@resend.dev` addresses and one configured address (`MY_EMAIL`). Activates automatically when the plugin is installed.
+The most important part of this plugin. It installs automatically as a `PreToolUse` hook the moment you enable the plugin — no configuration required.
+
+**What it blocks:**
+
+- `send-broadcast`, `create-automation`, `send-inbox-draft`, `send-new-inbox-email` — bulk Resend tools that can reach whole contact lists. Always blocked.
+- `send-email` and `send-batch-emails` to any address that is not `@resend.dev` or your configured `MY_EMAIL`. Blocked until you set `MY_EMAIL`.
+
+**To allow test sends to yourself**, add `MY_EMAIL` to your project's `.claude/settings.local.json`:
+
+```json
+{
+  "env": {
+    "MY_EMAIL": "you@yourdomain.com"
+  }
+}
+```
+
+Without this, only `@resend.dev` addresses are permitted. You cannot accidentally email a real recipient.
+
+---
+
+## What else is in this kit
 
 - **`skills/personalize`** — a Claude Code skill that reads your audience groups from `leads/leads.csv`, then writes one copy of each email per group into `campaigns/<name>/groups/<group>/emails/`. It reads persona angles from `brand/groups.md` if you create one.
 
@@ -34,34 +55,34 @@ Keeping content in the client repo also means you can update the plugin — a fi
 
 ## Setup
 
-### 1. Register the plugin
+### 1. Install the plugin
 
-In your project's `.claude/settings.json`:
+```bash
+claude plugin install studio-kit
+```
+
+### 2. Set `MY_EMAIL`
+
+In your project's `.claude/settings.local.json`:
 
 ```json
 {
-  "extraKnownMarketplaces": {
-    "studio-kit-local": {
-      "source": {
-        "source": "local",
-        "path": "/absolute/path/to/studio-kit"
-      }
-    }
-  },
-  "enabledPlugins": {
-    "studio-kit@studio-kit-local": true
+  "env": {
+    "MY_EMAIL": "you@yourdomain.com"
   }
 }
 ```
 
-### 2. Create your brand files
+The send guard activates immediately. Without `MY_EMAIL`, only `@resend.dev` addresses are permitted.
+
+### 3. Create your brand files
 
 Copy the templates from `examples/` into your project root as a starting point:
 
 ```
-examples/brand/voice.md         → brand/voice.md
-examples/brand/groups.md        → brand/groups.md
-examples/leads/leads.csv        → leads/leads.csv
+examples/brand/voice.md          → brand/voice.md
+examples/brand/groups.md         → brand/groups.md
+examples/leads/leads.csv         → leads/leads.csv
 examples/.claude/rules/emails.md → .claude/rules/emails.md
 ```
 
@@ -83,7 +104,7 @@ examples/.claude/rules/emails.md → .claude/rules/emails.md
 
 Without this file the personalize skill will still run, but opening lines will be generic rewrites rather than targeted copy.
 
-### 3. Create your structural rules
+### 4. Create your structural rules
 
 **`.claude/rules/emails.md`** — the reviewer and the review script both read this file. At minimum define:
 - Subject line character limit
@@ -91,20 +112,6 @@ Without this file the personalize skill will still run, but opening lines will b
 - Required merge tags (greeting, footer)
 - CTA link format and URL
 - Footer copy
-
-### 4. Set `MY_EMAIL`
-
-In your project's `.claude/settings.local.json`:
-
-```json
-{
-  "env": {
-    "MY_EMAIL": "you@yourdomain.com"
-  }
-}
-```
-
-Without this, the send guard only permits `@resend.dev` addresses. You will not be able to send test emails to yourself.
 
 ---
 

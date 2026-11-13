@@ -1,12 +1,12 @@
 {
   "name": "studio-kit",
   "version": "0.1.0",
-  "description": "Email campaign studio tools: safe send guard, audience personalizer, and brand voice reviewer.",
+  "description": "Safe-send guard for Resend + email campaign tools: audience personalizer and brand voice reviewer.",
   "license": "MIT",
   "author": {
     "name": "husnain",
     "url": "https://github.com/husnain"
   },
   "homepage": "https://husnain.github.io/studio-kit",
-  "keywords": ["email", "campaign", "resend", "marketing", "brand-voice"]
+  "keywords": ["send-guard", "resend-safety", "resend", "email", "campaign", "marketing", "brand-voice"]
 }
